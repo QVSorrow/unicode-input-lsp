@@ -7,8 +7,9 @@ import sys
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT))
-from completion import TABLE, complete, snippet, units
+SRC = ROOT / "src"
+sys.path.insert(0, str(SRC))
+from unicode_input_lsp.completion import TABLE, complete, snippet, units
 
 
 def frame(obj):
@@ -24,8 +25,10 @@ def request(method, params=None, id=None):
 
 
 def run(messages):
-    proc = subprocess.run([sys.executable, str(ROOT / "server.py")], input=messages,
-                          stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd="/", timeout=30)
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(SRC)
+    proc = subprocess.run([sys.executable, "-m", "unicode_input_lsp.server"], input=messages,
+                          stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd="/", env=env, timeout=30)
     data = proc.stdout
     results = []
     while data:
@@ -39,7 +42,7 @@ def run(messages):
 class LogicTests(unittest.TestCase):
     def test_table_exact_and_every_alias(self):
         self.assertEqual(len(TABLE), 1865)
-        self.assertEqual(hashlib.sha256((ROOT / 'data/abbreviations.json').read_bytes()).hexdigest(), 'fa5e317d4d481c8bf12d6438e489376931c18438dd0a68af3683a4cb9e92b5b0')
+        self.assertEqual(hashlib.sha256((SRC / 'unicode_input_lsp/data/abbreviations.json').read_bytes()).hexdigest(), 'fa5e317d4d481c8bf12d6438e489376931c18438dd0a68af3683a4cb9e92b5b0')
         for key, value in TABLE.items():
             with self.subTest(key=key):
                 items = complete('\\' + key, {'line': 0, 'character': units('\\' + key)})

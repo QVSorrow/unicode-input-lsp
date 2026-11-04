@@ -2,6 +2,22 @@
 
 A small stdio Language Server Protocol (LSP) server that offers Unicode completions from an abbreviation table. It accepts any `languageId`; configure it only for languages where the table is useful. It is a completion source, not an input rewriter: the editor must show and accept a completion.
 
+## Install without Nix
+
+Install from the GitHub repository with [pipx](https://pipx.pypa.io/):
+
+```sh
+pipx install 'git+https://github.com/QVSorrow/unicode-input-lsp.git'
+```
+
+Or use [uv](https://docs.astral.sh/uv/):
+
+```sh
+uv tool install 'git+https://github.com/QVSorrow/unicode-input-lsp.git'
+```
+
+Both install the `unicode-input-lsp` command in an isolated environment. The command runs the persistent stdio LSP server. It does not provide a help screen or a one-shot conversion mode.
+
 ## Run locally
 
 With Nix and flakes enabled:
@@ -46,4 +62,4 @@ Install `unicode-input-lsp` so that command is on `PATH`. Keep your existing ser
 - It uses full-document sync and UTF-16 positions. It does not perform VS Code-style automatic input rewriting.
 - The table comes from Lean's Unicode input mappings. Initial-slash mappings, diagnostics, and broad editor behavior are not claimed here.
 
-The abbreviation data has its own Apache-2.0 license and provenance; see [the data notes](docs/data-provenance.md). The server is licensed under Apache-2.0; see [LICENSE](LICENSE).
+The abbreviation data has its own Apache-2.0 license and provenance; see [the data notes](docs/data-provenance.md) and [data license](src/unicode_input_lsp/data/LICENSE). The server is licensed under Apache-2.0; see [LICENSE](LICENSE).

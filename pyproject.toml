@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "unicode-input-lsp"
+version = "1.0.0"
+description = "A small stdio LSP server for Unicode input completion"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "Apache-2.0"
+license-files = ["LICENSE", "src/unicode_input_lsp/data/LICENSE"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+]
+
+[project.urls]
+Homepage = "https://github.com/QVSorrow/unicode-input-lsp"
+Repository = "https://github.com/QVSorrow/unicode-input-lsp"
+
+[project.scripts]
+unicode-input-lsp = "unicode_input_lsp.server:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+include-package-data = false
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+unicode_input_lsp = ["data/abbreviations.json", "data/LICENSE"]
+
+[tool.setuptools.data-files]
+"share/doc/unicode-input-lsp" = ["docs/data-provenance.md"]

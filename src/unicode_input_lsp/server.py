@@ -2,7 +2,7 @@
 import json
 import sys
 
-from completion import complete
+from .completion import complete
 
 MAX_MESSAGE = 16 * 1024 * 1024
 
@@ -129,5 +129,9 @@ def run(inp, out):
     return 0
 
 
+def main():
+    return run(sys.stdin.buffer, sys.stdout.buffer)
+
+
 if __name__ == "__main__":
-    sys.exit(run(sys.stdin.buffer, sys.stdout.buffer))
+    sys.exit(main())

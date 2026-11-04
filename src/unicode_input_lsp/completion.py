@@ -1,8 +1,8 @@
 """Pure Lean abbreviation completion logic, with LSP UTF-16 coordinates."""
 import json
-from pathlib import Path
+from importlib.resources import files
 
-TABLE = json.loads((Path(__file__).parent / "data" / "abbreviations.json").read_text(encoding="utf-8"))
+TABLE = json.loads(files(__package__).joinpath("data/abbreviations.json").read_text(encoding="utf-8"))
 KEYS = sorted(TABLE)
 
 
