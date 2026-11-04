@@ -2,21 +2,33 @@
 
 A small stdio Language Server Protocol (LSP) server that offers Unicode completions from an abbreviation table. It accepts any `languageId`; configure it only for languages where the table is useful. It is a completion source, not an input rewriter: the editor must show and accept a completion.
 
-## Install without Nix
+## Install
 
-Install from the GitHub repository with [pipx](https://pipx.pypa.io/):
+### pipx
+
+Current pipx requires Python 3.10 or newer. Install from GitHub with [pipx](https://pipx.pypa.io/):
 
 ```sh
 pipx install 'git+https://github.com/QVSorrow/unicode-input-lsp.git'
 ```
 
-Or use [uv](https://docs.astral.sh/uv/):
+### uv
+
+Requires Python 3.9 or newer. Install from GitHub with [uv](https://docs.astral.sh/uv/):
 
 ```sh
 uv tool install 'git+https://github.com/QVSorrow/unicode-input-lsp.git'
 ```
 
-Both install the `unicode-input-lsp` command in an isolated environment. The command runs the persistent stdio LSP server. It does not provide a help screen or a one-shot conversion mode.
+### Nix
+
+With Nix flakes enabled, install the package in your profile:
+
+```sh
+nix profile install github:QVSorrow/unicode-input-lsp#unicode-input-lsp
+```
+
+pipx and uv install the `unicode-input-lsp` command in an isolated Python environment. The Nix package includes its Python runtime. The command runs the persistent stdio LSP server. It does not provide a help screen or a one-shot conversion mode.
 
 ## Run locally
 
